@@ -138,6 +138,7 @@ dmypy.json
 
 # Just ignore everything in .idea for now
 .idea
+.ijwb
 
 # User-specific stuff
 .idea/**/workspace.xml

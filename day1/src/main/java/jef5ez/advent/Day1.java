@@ -30,6 +30,7 @@ public class Day1 {
                 part1 += partFuel;
                 part2 += partFuel + extraFuel(partFuel);
             }
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
