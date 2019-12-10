@@ -21,3 +21,9 @@ scala_binary(
     main_class = "jef5ez.advent.Day3",
     resources = glob(["day3/src/main/resources/*"]),
 )
+
+scala_binary(
+    name = "day4",
+    srcs = glob(["day4/src/main/scala/**/*.scala"]),
+    main_class = "jef5ez.advent.Day4",
+)
