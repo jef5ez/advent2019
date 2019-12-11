@@ -27,3 +27,11 @@ scala_binary(
     srcs = glob(["day4/src/main/scala/**/*.scala"]),
     main_class = "jef5ez.advent.Day4",
 )
+
+scala_binary(
+    name = "day6",
+    srcs = glob(["day6/src/main/scala/**/*.scala"]),
+    main_class = "jef5ez.advent.Day6",
+    resources = glob(["day6/src/main/resources/*"]),
+    deps = ["@maven//:org_jgrapht_jgrapht_core"],
+)

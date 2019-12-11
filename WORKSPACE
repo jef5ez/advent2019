@@ -1,6 +1,31 @@
-rules_scala_version = "886bc9cf6d299545510b39b4872bbb5dc7526cb3"  # update this as needed
-
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+RULES_JVM_EXTERNAL_TAG = "2.8"
+
+RULES_JVM_EXTERNAL_SHA = "79c9850690d7614ecdb72d68394f994fef7534b292c4867ce5e7dec0aa7bdfad"
+
+http_archive(
+    name = "rules_jvm_external",
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+)
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+maven_install(
+    artifacts = [
+        "com.google.code.findbugs:jsr305:1.3.9",
+        "org.jgrapht:jgrapht-core:1.3.1",
+    ],
+    repositories = [
+        "https://jcenter.bintray.com/",
+        "https://repo1.maven.org/maven2",
+    ],
+)
+
+# scala stuff
+rules_scala_version = "886bc9cf6d299545510b39b4872bbb5dc7526cb3"  # update this as needed
 
 http_archive(
     name = "io_bazel_rules_scala",
