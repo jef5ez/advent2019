@@ -66,4 +66,22 @@ class Day10Test extends SpecificationWithJUnit {
     }
   }
 
+  "angle to heading" should {
+    "make up 0" >> {
+      angleToHeading((1, 0).angle((0, 0))) mustEqual 0.0
+    }
+
+    "make right pi/2" >> {
+      angleToHeading((1, 0).angle((1, 1))) mustEqual math.Pi / 2
+    }
+
+    "make down pi" >> {
+      angleToHeading((1, 0).angle((2, 0))) mustEqual math.Pi
+    }
+
+    "make left 3pi/2" >> {
+      angleToHeading((1, 1).angle((1, 0))) mustEqual math.Pi * 3 / 2
+    }
+  }
+
 }

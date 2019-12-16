@@ -81,7 +81,22 @@ object Day10 extends App {
     println(s"part1: $bestSensor")
   }
 
+  def angleToHeading(rads: Double): Double = {
+    (math.Pi * 5 / 2 + rads) % (2 * math.Pi)
+  }
+
   def part2(): Unit = {
+    val best = asteroids.map(sensor => {
+      val visible: Map[Double, Seq[(Int, Int)]] = getAngleMap(asteroids, sensor)
+      sensor -> visible
+    }).maxBy(_._2.size)
+    println(s"sensor at: ${best._1}")
+    val targets = best._2.toSeq.map{ case (a, b) => angleToHeading(a) -> b}.sortBy(_._1)
+    if (targets.size > 200) {
+      val loc = targets.take(200).last._2.minBy(t => best._1.distance(t))
+      println(s"200th shot: $loc")
+      println(loc._2 * 100 + loc._1)
+    } else ???
   }
 
   part1()
