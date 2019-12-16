@@ -17,6 +17,7 @@ maven_install(
     artifacts = [
         "com.google.code.findbugs:jsr305:1.3.9",
         "org.jgrapht:jgrapht-core:1.3.1",
+        "org.specs2:specs2-core_2.11:4.4.1",
     ],
     repositories = [
         "https://jcenter.bintray.com/",
@@ -40,7 +41,11 @@ scala_register_toolchains()
 
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
 
-scala_repositories()  # defaults to scala version 2.11.10 when empty
+scala_repositories()  # defaults to scala version 2.11.12 when empty
+
+load("@io_bazel_rules_scala//specs2:specs2_junit.bzl", "specs2_junit_repositories")
+
+specs2_junit_repositories()
 
 protobuf_version = "09745575a923640154bcf307fba8aedff47f240a"
 

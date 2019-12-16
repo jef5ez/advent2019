@@ -1,5 +1,5 @@
 load("@rules_java//java:defs.bzl", "java_binary", "java_library")
-load("@io_bazel_rules_scala//scala:scala.bzl", "scala_binary", "scala_library", "scala_test")
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_binary", "scala_library", "scala_specs2_junit_test")
 
 java_binary(
     name = "day1",
@@ -50,4 +50,14 @@ scala_binary(
     srcs = glob(["day10/src/main/scala/**/*.scala"]),
     main_class = "jef5ez.advent.Day10",
     deps = ["//src/main/resources:advent-inputs"],
+)
+
+scala_specs2_junit_test(
+    name = "test-day10",
+    srcs = glob(["day10/src/test/scala/**/*.scala"]),
+    suffixes = ["Test"],
+    deps = [
+        "//:day10",
+        "@maven//:org_specs2_specs2_core_2_11",
+    ],
 )
