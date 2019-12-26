@@ -1,7 +1,6 @@
 package jef5ez.advent
 
 import scala.io.Source
-import scala.collection.JavaConverters._
 
 object Day12 extends App {
 
@@ -67,7 +66,61 @@ object Day12 extends App {
     println(s"Total Energy: $energy")
   }
 
+  def comparePositions(pairs: Seq[(Moon, Moon)]): (Boolean, Boolean, Boolean) = {
+    val x = pairs.forall{ case (cur, init) =>
+      cur.position(0) == init.position(0) && cur.velocity(0) == init.velocity(0)
+    }
+    val y = pairs.forall{ case (cur, init) =>
+      cur.position(1) == init.position(1) && cur.velocity(1) == init.velocity(1)
+    }
+    val z = pairs.forall{ case (cur, init) =>
+      cur.position(2) == init.position(2) && cur.velocity(2) == init.velocity(2)
+    }
+    (x, y, z)
+  }
+
+
+  def leastCommonMultiple(nums: Array[Long]): Long = {
+    nums match {
+      case Array(x, y, z) =>
+        lcm(x, lcm(y, z))
+    }
+  }
+
+  def lcm(a: Long, b: Long) = a * (b / gcd(a, b))
+
+  def gcd(a: Long, b: Long) = BigInt(a).gcd(BigInt(b)).toLong
+
   def part2(): Unit = {
+    val starting = readInput()
+    val moons = readInput()
+    val pairs = moons.zip(starting)
+    val repeatedSteps = Array.fill(3)(Option.empty[Long])
+    var step = 0L
+    def updateRepeats(idx: Int, name: String): Unit = {
+      if (repeatedSteps(idx).isEmpty) {
+        repeatedSteps.update(idx, Some(step))
+        println(s"found first repeated $name at step $step")
+      } else println(s"found another repeated $name at step $step")
+    }
+
+    while (repeatedSteps.exists(op => op.isEmpty)) {
+      step += 1
+      moveMoons(moons)
+      val (x, y, z) = comparePositions(pairs)
+      if (x) {
+        updateRepeats(0, "x")
+      }
+      if (y) {
+        updateRepeats(1, "y")
+      }
+      if (z) {
+        updateRepeats(2, "z")
+      }
+    }
+    val allSteps = repeatedSteps.flatten
+    println(s"All repeating intervals: ${allSteps.mkString(",")}")
+    println(s"lcm ${leastCommonMultiple(allSteps.take(3))}")
   }
 
   part1()
