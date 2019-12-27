@@ -19,6 +19,7 @@ maven_install(
         "org.jgrapht:jgrapht-core:1.3.1",
         "org.specs2:specs2-core_2.11:4.4.1",
     ],
+    fetch_sources = True,
     repositories = [
         "https://jcenter.bintray.com/",
         "https://repo1.maven.org/maven2",
