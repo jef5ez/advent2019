@@ -41,19 +41,20 @@ object Day14 extends App {
       if (need <= total || current == "ORE") onDeck.dequeue()
       else {
         reactions.get(current).foreach { case (produced, ingredients) =>
-          totals.update(current, total + produced)
+          val newChems = need - total
+          val multiplier =  if (need % produced == 0) newChems / produced
+          else 1 + (newChems / produced)
+          totals.update(current, total + produced * multiplier)
           ingredients.foreach { case (n, ing) =>
-            needed.update(ing, needed.getOrElse(ing, 0L) + n)
+            needed.update(ing, needed.getOrElse(ing, 0L) + n * multiplier)
             if (!onDeck.contains(ing)) {
               onDeck.enqueue(ing)
             }
           }
         }
       }
-      if (current == "ORE") println("tried to lookup ore")
     }
-    val ore = needed("ORE")
-    ore
+    needed("ORE")
   }
   def part2(): Unit = {
     val maxOre = 1e12.longValue()
@@ -63,13 +64,15 @@ object Day14 extends App {
     do {
       println(s"more than $newFuel")
       fuel = newFuel
-      ore = findNeededOre(fuel+1L)
-      newFuel = math.max(fuel+1L, math.floor((fuel + 1L) * maxOre / ore).toLong)
+      val plusOne = fuel + 1L
+      ore = findNeededOre(plusOne)
+      println(s"trying $plusOne fuel, consumes $ore")
+      newFuel = math.max(plusOne, math.floor(plusOne * maxOre / ore).toLong)
     } while (ore < maxOre)
-
+    println(s"final fuel: $fuel")
   }
 
   part1()
-//  part2()
+  part2()
 
 }
