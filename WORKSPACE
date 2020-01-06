@@ -26,7 +26,7 @@ maven_install(
     ],
 )
 
-# scala stuff
+############ scala stuff
 rules_scala_version = "886bc9cf6d299545510b39b4872bbb5dc7526cb3"  # update this as needed
 
 http_archive(
@@ -68,3 +68,18 @@ http_archive(
     type = "tar.gz",
     url = "https://github.com/bazelbuild/bazel-skylib/releases/download/{}/bazel-skylib.{}.tar.gz".format(skylib_version, skylib_version),
 )
+
+############### rust things
+http_archive(
+    name = "io_bazel_rules_rust",
+    sha256 = "b6da34e057a31b8a85e343c732de4af92a762f804fc36b0baa6c001423a70ebc",
+    strip_prefix = "rules_rust-55f77017a7f5b08e525ebeab6e11d8896a4499d2",
+    urls = [
+        # Master branch as of 2019-10-07
+        "https://github.com/bazelbuild/rules_rust/archive/55f77017a7f5b08e525ebeab6e11d8896a4499d2.tar.gz",
+    ],
+)
+
+load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
+
+rust_repositories()
