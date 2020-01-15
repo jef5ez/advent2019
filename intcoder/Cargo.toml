@@ -1,3 +1,4 @@
+# this was just for running rust without bazel
 [package]
 name = "intcoder"
 version = "0.1.0"
