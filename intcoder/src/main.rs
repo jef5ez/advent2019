@@ -1,7 +1,6 @@
+extern crate intcode_lib;
 
-fn run_int_code(code: Vec<i32>) {
-    println!("the slice has {} elements", code.len());
-}
+use intcode_lib::intcoder::run_int_code;
 
 fn main() {
     let v = vec![1, 2, 3];
