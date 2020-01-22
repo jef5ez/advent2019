@@ -1,9 +1,16 @@
 extern crate intcode_lib;
 
 use intcode_lib::intcoder::run_int_code;
+use std::fs;
+use std::path::PathBuf;
 
 fn main() {
-    let v = vec![1, 2, 3];
+    let path = "/home/joseph/src/advent2019/src/main/resources/day2.txt";
 
-    run_int_code(v);
+    let program: String = fs::read_to_string(path)
+        .expect("Error reading file");
+
+    let ints: Vec<i32>  = program.trim().split(',').map(|x| x.parse().unwrap()).collect();
+
+    run_int_code(ints);
 }
