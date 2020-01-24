@@ -12,3 +12,7 @@ alias(
     name = "log",
     actual = "@raze__log__0_3_6//:log",
 )
+alias(
+    name = "pyo3",
+    actual = "@raze__pyo3__0_9_0_alpha_1//:pyo3",
+)

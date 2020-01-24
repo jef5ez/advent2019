@@ -6,8 +6,11 @@ rust_library(
         "src/intcoder.rs",
         "src/lib.rs",
     ],
-    crate_features = ["default"],
-    deps = ["//intcoder/cargo:log"],
+    crate_features = [
+        "default",
+        "proc-macro2",
+    ],
+    deps = ["//intcoder/cargo:pyo3"],
 )
 
 rust_library(
@@ -16,9 +19,12 @@ rust_library(
         "src/intcoder.rs",
         "src/lib.rs",
     ],
-    crate_features = ["default"],
+    crate_features = [
+        "default",
+        "proc-macro2",
+    ],
     crate_type = "cdylib",
-    deps = ["//intcoder/cargo:log"],
+    deps = ["//intcoder/cargo:pyo3"],
 )
 
 rust_binary(

@@ -17,8 +17,17 @@ path = "fake_lib.rs"
 [dependencies]
 log = "=0.3.6"
 
+[dependencies.pyo3]
+version = "0.9.0-alpha.1"
+features = ["extension-module"]
+
 [raze]
 # The WORKSPACE relative path to the Cargo.toml working directory.
 workspace_path = "//intcoder/cargo"
 genmode = "Remote"
 target = "x86_64-unknown-linux-gnu"
+
+[raze.crates.proc-macro2.'1.0.8']
+additional_flags = [
+    "--cfg=use_proc_macro",
+]

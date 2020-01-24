@@ -86,7 +86,8 @@ rust_repository_set(
     name = "rust_linux_x86_64",
     exec_triple = "x86_64-unknown-linux-gnu",
     extra_target_triples = [],
-    version = "1.39.0",
+    iso_date = "2019-08-01",
+    version = "nightly",
 )
 
 load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
@@ -97,3 +98,19 @@ bazel_version(name = "bazel_version")
 load("//intcoder/cargo:crates.bzl", "raze_fetch_remote_crates")
 
 raze_fetch_remote_crates()
+
+############### python things
+http_archive(
+    name = "rules_python",
+    sha256 = "aa96a691d3a8177f3215b14b0edc9641787abaaa30363a080165d06ab65e1161",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.0.1/rules_python-0.0.1.tar.gz",
+)
+
+load("@rules_python//python:repositories.bzl", "py_repositories")
+
+py_repositories()
+
+# Only needed if using the packaging rules.
+load("@rules_python//python:pip.bzl", "pip_repositories")
+
+pip_repositories()
